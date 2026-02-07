@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品一覧</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+
+<h2>商品一覧</h2>
+
+<div th:if="${products != null}" th:each="p : ${products}" 
+     style="margin-bottom:20px; border-bottom:1px solid #ccc; padding-bottom:10px; display:flex; align-items:flex-start;">
+    
+    <!-- 画像表示 -->
+    <div style="margin-right:15px;">
+        <img th:src="@{${p.imageUrl}}" alt="商品画像" style="width:120px; height:auto; border:1px solid #ccc;"/>
+    </div>
+    
+    <!-- 商品情報 -->
+    <div>
+        <!-- 商品詳細へのリンク -->
+        <h3>
+            <a th:href="@{/product/{id}(id=${p.id})}" th:text="${p.name}">商品名</a>
+        </h3>
+        <p th:text="${p.description}">商品説明</p>
+        <p>価格: ¥<span th:text="${T(java.lang.Math).round(p.price)}">0</span></p>
+
+        <!-- カート追加フォーム -->
+        <form th:action="@{/cart/add}" method="post" style="display:inline; margin-top:5px;">
+            <input type="hidden" name="productId" th:value="${p.id}" />
+            <input type="number" name="qty" value="1" min="1" style="width:60px;"/>
+            <button type="submit">カートに追加</button>
+        </form>
+    </div>
+</div>
+
+<div th:if="${products == null or #lists.isEmpty(products)}">
+    <p>商品が登録されていません。</p>
+</div>
+
+<a href="/cart/view">カートを見る</a>
+
+</body>
+</html>

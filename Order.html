@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>購入履歴</title>
+</head>
+<body>
+  <h1>購入履歴</h1>
+  <a href="/">戻る</a>
+  <div th:each="o : ${orders}">
+    <h3>注文ID: <span th:text="${o.id}"></span></h3>
+  <p>合計: ¥<span th:text="${T(java.lang.Math).round(o.total)}"></span></p>
+    <ul>
+      <li th:each="i : ${o.items}" th:text="${i.name + ' x' + i.quantity + ' ¥' + i.price}"></li>
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<title>注文完了</title>
+</head>
+
+<body>
+	<!-- ヘッダー -->
+	<div th:replace="~{fragments/layout :: header-loggedin}"></div>
+	<h1>注文が完了しました</h1>
+	<p>注文ID: <span th:text="${order.id}">-</span></p>
+	<p>合計: ¥<span th:text="${order.total}">0</span></p>
+	<a href="/">トップに戻る</a>
+	<!-- フッター（共通） -->
+	<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>カート</title>
+	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+	<!-- ヘッダー -->
+	<div th:replace="~{fragments/layout :: header-loggedin}"></div>
+
+	<h1>カート</h1>
+	<a th:href="@{/}">買い物を続ける</a>
+
+	<table>
+		<thead>
+			<tr>
+				<th>商品名</th>
+				<th>価格</th>
+				<th>数量</th>
+				<th>小計</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="item : ${cart}">
+				<td th:text="${item.name}">商品名</td>
+				<td><span th:text="${T(java.lang.Math).round(item.price)}">0</span></td>
+				<td>
+					<form th:action="@{/cart/update}" method="post">
+						<input type="hidden" name="productId" th:value="${item.productId}" />
+						<input type="number" name="qty" th:value="${item.quantity}" min="0" />
+						<button type="submit">更新</button>
+					</form>
+				</td>
+				<td><span th:text="${T(java.lang.Math).round(item.subtotal)}">0</span></td>
+				<td>
+					<form th:action="@{/cart/update}" method="post" style="display:inline">
+						<input type="hidden" name="productId" th:value="${item.productId}" />
+						<input type="hidden" name="qty" value="0" />
+						<button type="submit">削除</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<!-- 商品名・価格・数量の列をまとめて右寄せ -->
+				<td colspan="3" style="text-align: center; font-weight: bold;">合計</td>
+				<!-- 小計の合計 -->
+				<!-- 合計金額 -->
+				<td><span th:text="${T(java.lang.Math).round(total)}">0</span></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<form th:action="@{/cart/checkout}" method="post">
+		<button type="submit">注文を確定する</button>
+	</form>
+
+	<!-- フッター -->
+	<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+
+</html>

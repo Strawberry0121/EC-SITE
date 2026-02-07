@@ -1,0 +1,55 @@
+/* Back To Top ボタン */
+#backToTopBtn {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	display: none;
+	width: 50px;
+	height: 50px;
+	background: #007BFF;
+	/* 青色 */
+	color: white;
+	border: none;
+	border-radius: 50%;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+	font-size: 24px;
+	text-align: center;
+	line-height: 50px;
+	transition: all 0.3s ease;
+	z-index: 1000;
+}
+
+#backToTopBtn:hover {
+	background: #0056b3;
+	transform: translateY(-5px) scale(1.1);
+	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* トースト通知 */
+#cart-toast {
+	display: none;
+	position: fixed;
+	bottom: 100px;
+	/* 上に戻るボタンより上に表示 */
+	right: 40px;
+	background-color: #4CAF50;
+	color: white;
+	padding: 12px 20px;
+	border-radius: 8px;
+	font-size: 14px;
+	z-index: 1001;
+	opacity: 0.9;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.add-message {
+	display: none;
+	/* 初期非表示 */
+	color: green;
+	font-weight: bold;
+	margin-left: 10px;
+	/* ボタンの右横に少し間隔 */
+	font-size: 14px;
+	transition: opacity 0.3s ease;
+}

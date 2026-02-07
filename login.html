@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- ヘッダー（リンクなし） -->
+<div th:replace="~{fragments/layout :: header-login}"></div>
+<h1>ログイン</h1>
+
+<form th:action="@{/login}" method="post">
+    <div>
+        <label>ユーザー名:</label>
+        <input type="text" name="username" />
+    </div>
+    <div>
+        <label>パスワード:</label>
+        <input type="password" name="password" />
+    </div>
+    <div>
+        <button type="submit">ログイン</button>
+    </div>
+
+    <div th:if="${param.error}">
+        <p style="color:red;">ユーザー名またはパスワードが間違っています</p>
+    </div>
+    <div th:if="${param.logout}">
+        <p style="color:green;">ログアウトしました</p>
+    </div>
+</form>
+
+<!-- フッター（共通） -->
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商品一覧</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        #backToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .add-message {
+            margin-left: 5px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <div th:replace="~{fragments/layout :: header-loggedin}"></div>
+
+    <!-- 商品一覧 -->
+    <main>
+        <section>
+            <h2>商品一覧</h2>
+
+            <div th:if="${products != null and !#lists.isEmpty(products)}">
+                <div th:each="p : ${products}" style="margin-bottom:20px; border-bottom:1px solid #ccc; padding-bottom:10px;">
+                    <h3 th:text="${p.name}">商品名</h3>
+                    <p th:text="${p.description}">商品説明</p>
+                    価格: ¥<span th:text="${T(java.lang.Math).round(p.price)}">0</span>
+                    <br>
+                    <a th:href="@{/product/{id}(id=${p.id})}">詳細を見る</a>
+
+                    <form class="add-to-cart-form" style="display:inline-flex; align-items:center; margin-left:10px;">
+                        <input type="hidden" name="productId" th:value="${p.id}" />
+                        <input type="number" name="qty" value="1" min="1" style="width:60px;" />
+                        <button type="submit" style="margin-left:5px;">カートに追加</button>
+                        <span class="add-message" style="display:none;">✔ カートに追加しました</span>
+                    </form>
+                </div>
+            </div>
+
+            <div th:if="${products == null or #lists.isEmpty(products)}">
+                <p>商品が登録されていません。</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 上に戻るボタン -->
+  <button id="backToTopBtn">↑</button>
+
+    <!-- JS -->
+    <script>
+        // カート追加処理（Ajax）
+        document.querySelectorAll(".add-to-cart-form").forEach(form => {
+            form.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const response = await fetch("/cart/add", {
+                    method: "POST",
+                    body: formData
+                });
+                const cartCount = await response.text();
+
+                // ヘッダーのカートバッジ更新
+                const badge = document.getElementById("cart-count");
+                if (badge) badge.innerText = cartCount;
+
+                // メッセージ表示
+                const msg = form.querySelector(".add-message");
+                msg.style.display = "inline";
+                setTimeout(() => { msg.style.display = "none"; }, 2000);
+            });
+        });
+
+        // 上に戻るボタン表示制御
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        window.addEventListener("scroll", () => {
+            backToTopBtn.style.display = window.scrollY > 200 ? "block" : "none";
+        });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+	<!-- フッター（共通） -->
+	<div th:replace="~{fragments/layout :: footer}"></div>
+</body>
+</html>
