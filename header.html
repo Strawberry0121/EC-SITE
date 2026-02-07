@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+	<!-- ログイン済み用ヘッダー（リンクあり） -->
+	<header th:fragment="header-loggedin">
+	    <h1>ショッピングサイト</h1>
+	    <nav>
+	        <a th:href="@{/}">ホーム</a>
+	        <a th:href="@{/cart/view}">
+	            🛒 カート
+	            <span id="cart-count" th:text="${cartCount} ?: 0">0</span>
+	        </a>
+	        <a th:href="@{/logout}">ログアウト</a>
+	    </nav>
+	    <hr>
+	</header>
+
+	<!-- ログインページ用ヘッダー（リンクなし） -->
+	<header th:fragment="header-login">
+	    <h1>ショッピングサイト</h1>
+	    <hr>
+	</header>
+</body>
+</html>

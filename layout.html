@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<!-- html / head / body は書かない -->
+
+	<header th:fragment="header-loggedin">
+	    <h1>ショッピングサイト</h1>
+
+	    <nav>
+	        <a th:href="@{/}">商品一覧</a> |
+	        <a th:href="@{/cart/view}">
+	            🛒 カート
+	            <!-- ⭐ id を付与して JS で更新可能に -->
+	            <span id="cart-count" th:text="${cartCount != null ? cartCount : 0}">0</span>
+	        </a> |
+	        <a th:href="@{/logout}">ログアウト</a>
+	    </nav>
+
+	    <hr>
+	</header>
+	<!-- ログインページ用ヘッダー（リンクなし） -->
+		<header th:fragment="header-login">
+		    <h1>ショッピングサイト</h1>
+		    <hr>
+		</header>
+	<footer th:fragment="footer">
+	    <hr>
+	    <p>© 2026 Shopping Site</p>
+	    <!-- ⭐ toast はフッターに置くと Ajax で表示できる -->
+	    <div id="toast" class="toast"></div>
+	</footer>
+	
+</body>
+</html>
