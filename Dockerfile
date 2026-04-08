@@ -3,10 +3,11 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
 # Gradle wrapper ファイルも含めて全てコピー
-COPY * .
-#COPY gradlew .
-#COPY build.gradle .
-#COPY settings.gradle .
+COPY src src
+COPY gradle gradle
+COPY gradlew .
+COPY build.gradle .
+COPY settings.gradle .
 
 RUN chmod +x ./gradlew
 RUN chmod -R +x ./gradle
