@@ -2,14 +2,17 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-# 全部コピー
-COPY . /app
+# まず全部コピー
+COPY . .
 
-# 実行権限
-RUN chmod +x gradlew
+# gradlewがある前提（←ここ重要）
+RUN chmod +x ./gradlew
 
 # ビルド
 RUN ./gradlew build -x test
 
+# jar確認（デバッグ用）
+RUN ls -l build/libs
+
 # 起動
-CMD ["sh", "-c", "java -jar build/libs/*.jar"]
+CMD ["java", "-jar", "build/libs/app.jar"]
