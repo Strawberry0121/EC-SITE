@@ -58,5 +58,6 @@ public class AuthController {
     public String register(User user) {
         userService.registerUser(user);
         return "redirect:/login";
+    
     }
 }
