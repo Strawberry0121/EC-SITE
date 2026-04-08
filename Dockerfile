@@ -9,6 +9,8 @@ COPY * .
 #COPY settings.gradle .
 
 RUN chmod +x ./gradlew
+RUN chmod -R +x ./gradle
+
 RUN ./gradlew build -x test
 
 # アプリケーションを起動
