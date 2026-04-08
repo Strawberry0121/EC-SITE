@@ -2,12 +2,14 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-# サブフォルダごとコピー
-COPY ecsitedemo /app
+# 全部コピー
+COPY . /app
 
-WORKDIR /app
-
+# 実行権限
 RUN chmod +x gradlew
+
+# ビルド
 RUN ./gradlew build -x test
 
-CMD ["java", "-jar", "build/libs/*.jar"]
+# 起動
+CMD ["sh", "-c", "java -jar build/libs/*.jar"]
