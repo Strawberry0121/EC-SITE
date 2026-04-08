@@ -1,34 +1,16 @@
-# ===== Build Stage =====
-FROM eclipse-temurin:21-jdk AS build
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-# Gradle Wrapperを先にコピー（重要）
-COPY gradlew .
+# Gradle wrapper ファイルも含めて全てコピー
 COPY gradle gradle
-COPY build.gradle settings.gradle ./
-
-# 権限付与
-RUN chmod +x gradlew
-
-# 依存ダウンロード（キャッシュ効率化）
-RUN ./gradlew dependencies --no-daemon || true
-
-# 残りのソースをコピー
+COPY gradlew .
+COPY build.gradle .
+COPY settings.gradle .
 COPY src src
 
-# ビルド
-RUN ./gradlew bootJar --no-daemon
+RUN chmod +x ./gradlew
+RUN ./gradlew build -x test
 
-
-# ===== Run Stage =====
-FROM eclipse-temurin:21-jre
-
-WORKDIR /app
-
-COPY --from=build /app/build/libs/*.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# 起動
-# CMD ["java", "-jar", "build/libs/demo-0.0.1-SNAPSHOT.jar"]
+# アプリケーションを起動
+CMD ["java", "-jar", "build/libs/AutoHeroQuest-0.0.1-SNAPSHOT.jar"]
