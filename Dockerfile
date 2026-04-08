@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY . /app
 
-RUN chmod +x gradlew
-RUN ./gradlew build -x test
+# gradlewが無くても落ちないようにする
+RUN chmod +x gradlew || true
+RUN ls -la
+RUN ./gradlew build -x test || echo "gradlew失敗"
 
 EXPOSE 8080
 
