@@ -15,4 +15,4 @@ RUN ./gradlew build -x test
 RUN ls -l build/libs
 
 # 起動
-CMD ["java", "-jar", "build/libs/app.jar"]
+CMD ["java", "-jar", "build/libs/demo-0.0.1-SNAPSHOT.jar"]
