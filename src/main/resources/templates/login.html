@@ -9,7 +9,7 @@
 <body>
 
 <!-- ヘッダー（リンクなし） -->
-<div th:replace="~{fragments/layout :: header-login}"></div>
+<div th:replace="~{layout :: header-login}"></div>
 <h1>ログイン</h1>
 
 <form th:action="@{/login}" method="post">
@@ -34,7 +34,7 @@
 </form>
 
 <!-- フッター（共通） -->
-<div th:replace="~{fragments/layout :: footer}"></div>
+<div th:replace="~{layout :: footer}"></div>
 
 </body>
 </html>

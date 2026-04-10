@@ -10,13 +10,13 @@
 
 <body>
 	<!-- ヘッダー -->
-	<div th:replace="~{fragments/layout :: header-loggedin}"></div>
+	<div th:replace="~{layout :: header-loggedin}"></div>
 	<h1>注文が完了しました</h1>
 	<p>注文ID: <span th:text="${order.id}">-</span></p>
 	<p>合計: ¥<span th:text="${order.total}">0</span></p>
 	<a href="/">トップに戻る</a>
 	<!-- フッター（共通） -->
-	<div th:replace="~{fragments/layout :: footer}"></div>
+	<div th:replace="~{layout :: footer}"></div>
 </body>
 
 </html>
