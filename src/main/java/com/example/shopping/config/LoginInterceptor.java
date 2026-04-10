@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         HttpSession session = request.getSession(false);
         
-        if(request.getServletPath() === "/login"){
+        if(request.getServletPath() == "/login"){
             return true;
         }
 
