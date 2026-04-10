@@ -32,6 +32,10 @@ public class LoginInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
 
         HttpSession session = request.getSession(false);
+        
+        if(request.getServletPath() === "/login"){
+            return true;
+        }
 
         if(session != null && session.getAttribute("USER") != null){
             return true;
