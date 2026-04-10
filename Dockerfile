@@ -1,17 +1,19 @@
+# Java 21
 FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-# 先にGradle設定だけコピー（キャッシュ制御）
-COPY build.gradle settings.gradle gradlew ./
-COPY gradle gradle
+# プロジェクト全体コピー（これが重要）
+COPY . .
 
+# Gradle実行権限
 RUN chmod +x ./gradlew
-RUN ./gradlew dependencies --no-daemon
 
-# ソースは後でコピー
-COPY src src
+# ビルド（testスキップ）
+RUN ./gradlew build -x test
 
-RUN ./gradlew build -x test --no-daemon
+# RenderのPORTを使う
+ENV PORT=8080
 
-CMD ["java", "-jar", "build/libs/EC-SITE-0.0.1-SNAPSHOT.jar"]
+# 起動
+CMD ["sh", "-c", "java -jar build/libs/EC-SITE-0.0.1-SNAPSHOT.jar --server.port=$PORT"]
