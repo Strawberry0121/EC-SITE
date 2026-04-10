@@ -31,17 +31,19 @@ public class LoginInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
 
-        HttpSession session = request.getSession(false);
-        
-        if(request.getServletPath() == "/login"){
-            return true;
-        }
+      String path = request.getServletPath();
 
-        if(session != null && session.getAttribute("USER") != null){
-            return true;
-        }
+if ("/login".equals(path)) {
+    return true;
+}
 
-        response.sendRedirect("/login");
-        return false;
-    }
+HttpSession session = request.getSession(false);
+
+if (session != null && session.getAttribute("USER") != null) {
+    return true;
+}
+
+response.sendRedirect("/login");
+return false;
+                             }
 }
