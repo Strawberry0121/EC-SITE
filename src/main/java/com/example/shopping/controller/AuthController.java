@@ -8,6 +8,12 @@ import com.example.shopping.repository.UserRepository;
 import com.example.shopping.model.User;
 import com.example.shopping.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.shopping.repository.UserRepository;
+
 /**
  * 認証・登録を担当するコントローラー
  * ログインページとユーザー登録機能を提供する
@@ -16,6 +22,7 @@ import com.example.shopping.service.UserService;
 public class AuthController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
     /**
      * コンストラクタ注入
@@ -23,8 +30,9 @@ public class AuthController {
      * @param userService ユーザーサービス
      */
     @Autowired
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     /**
