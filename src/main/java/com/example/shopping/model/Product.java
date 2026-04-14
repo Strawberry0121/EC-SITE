@@ -31,7 +31,6 @@ public class Product{
     @Column(name = "description")
     private String description;
 
-    public Product() {}
 
     public Product(String name, String category, double price, String description, String imageUrl) {
         this.name = name;
