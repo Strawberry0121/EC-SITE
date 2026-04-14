@@ -14,27 +14,17 @@ import org.springframework.stereotype.Service;
 import com.example.shopping.model.User;
 import com.example.shopping.repository.UserRepository;
 
-@Service
-public class CustomUserDetailsService implements UserDetailsService {
+@Configuration
+public class SecurityConfig {
 
-    private final UserRepository userRepository;
-
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
-
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword()) // ← ここ重要（暗号化済み）
-                .roles("USER")
-                .build();
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // 設定
+        return http.build();
     }
 }
