@@ -5,11 +5,12 @@ import org.springframework.stereotype.Service;
 import com.example.shopping.model.User;
 import com.example.shopping.repository.UserRepository;
 
+
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final PasswordEncoder passwordEncoder;
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
