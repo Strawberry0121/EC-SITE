@@ -11,9 +11,11 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+   public UserService(UserRepository userRepository,
+                   PasswordEncoder passwordEncoder) {
+    this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
+}
 
     public void registerUser(User user) {
         //パスワードを暗号化
