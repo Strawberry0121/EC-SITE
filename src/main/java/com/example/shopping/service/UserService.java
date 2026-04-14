@@ -15,7 +15,10 @@ public class UserService {
     }
 
     public void registerUser(User user) {
-        // パスワードの暗号化などもここで行う
+        //パスワードを暗号化
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
         userRepository.save(user);
     }
 }

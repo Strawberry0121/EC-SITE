@@ -22,19 +22,15 @@ public class SecurityConfig {
             // CSRF無効（開発用）
             .csrf(csrf -> csrf.disable())
 
-            // H2コンソール用
-            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
-
             // 全許可（自作ログイン使うため）
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/h2-console/**").permitAll()
                     .anyRequest().permitAll()
             )
 
-            // ❌ Spring Securityのログイン機能を完全無効化
+            // Spring Securityのログイン機能を無効
             .formLogin(form -> form.disable())
 
-            // ログアウトも無効（必要なら後で実装）
+            // ログアウトも無効
             .logout(logout -> logout.disable());
 
         return http.build();
