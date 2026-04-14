@@ -37,6 +37,23 @@ public class AuthController {
         return "login";
     }
 
+    @PostMapping("/login")
+    public String login(@RequestParam String username,
+                        @RequestParam String password,
+                        HttpSession session,
+                        Model model) {
+
+        var userOpt = userRepository.findByUsername(username);
+
+        if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
+            session.setAttribute("USER", userOpt.get()); // ← 有効化
+            return "redirect:/";
+        }
+
+        model.addAttribute("error", "ユーザー名またはパスワードが違います");
+        return "login";
+    }
+
     /**
      * ユーザー登録フォームを表示する
      *
