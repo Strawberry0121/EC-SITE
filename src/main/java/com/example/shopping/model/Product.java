@@ -33,7 +33,7 @@ public class Product {
     private String description;
 
     // 追加（DBと一致させる）
-    @Column(name = "image_url")
+    @Column(name = "imageurl")
     private String imageUrl;
 
     // 必須（JPA用）
