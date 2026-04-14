@@ -15,24 +15,27 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+   @Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http
-            // CSRF無効（開発用）
-            .csrf(csrf -> csrf.disable())
+    http
+        .csrf(csrf -> csrf.disable())
 
-            // 全許可（自作ログイン使うため）
-            .authorizeHttpRequests(auth -> auth
-                    .anyRequest().permitAll()
-            )
+        .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/login", "/register").permitAll() // ← ログイン系だけ許可
+                .anyRequest().authenticated() // ← それ以外はログイン必須
+        )
 
-            // Spring Securityのログイン機能を無効
-            .formLogin(form -> form.disable())
+        .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+        )
 
-            // ログアウトも無効
-            .logout(logout -> logout.disable());
+        .logout(logout -> logout
+                .logoutSuccessUrl("/login")
+        );
 
-        return http.build();
-    }
+    return http.build();
+}
 }
