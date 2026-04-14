@@ -7,35 +7,34 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
-public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+import org.springframework.security.core.userdetails.*;
+import org.springframework.stereotype.Service;
+
+import com.example.shopping.model.User;
+import com.example.shopping.repository.UserRepository;
+
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-   @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Override
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
 
-    http
-        .csrf(csrf -> csrf.disable())
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("User not found"));
 
-        .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/register").permitAll() // ← ログイン系だけ許可
-                .anyRequest().authenticated() // ← それ以外はログイン必須
-        )
-
-        .formLogin(form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/", true)
-                .permitAll()
-        )
-
-        .logout(logout -> logout
-                .logoutSuccessUrl("/login")
-        );
-
-    return http.build();
-}
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getUsername())
+                .password(user.getPassword()) // ← ここ重要（暗号化済み）
+                .roles("USER")
+                .build();
+    }
 }

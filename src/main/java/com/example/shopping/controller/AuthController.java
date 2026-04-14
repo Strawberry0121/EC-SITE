@@ -45,7 +45,7 @@ public class AuthController {
         return "login";
     }
 
-    @PostMapping("/login")
+    /**@PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         HttpSession session,
@@ -61,6 +61,7 @@ public class AuthController {
         model.addAttribute("error", "ユーザー名またはパスワードが違います");
         return "login";
     }
+    */
 
     /**
      * ユーザー登録フォームを表示する
