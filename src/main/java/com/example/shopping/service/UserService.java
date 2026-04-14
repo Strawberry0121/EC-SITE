@@ -1,5 +1,5 @@
 package com.example.shopping.service;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.shopping.model.User;
