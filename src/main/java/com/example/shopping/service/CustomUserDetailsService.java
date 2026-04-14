@@ -22,7 +22,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.repo = repo;
     }
 
-    @Override
+    /**
+   @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<com.example.shopping.model.User> userOpt = repo.findByUsername(username);
         com.example.shopping.model.User user = userOpt.orElseThrow(() -> new UsernameNotFoundException("User not found"));
@@ -33,4 +34,17 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .roles("USER")  // 必要に応じてROLEを変更
                 .build();
     }
+    */
+    @Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+    com.example.shopping.model.User user = repo.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+    return org.springframework.security.core.userdetails.User
+            .withUsername(user.getUsername())
+            .password(user.getPassword())
+            .roles("USER")
+            .build();
+}
 }
