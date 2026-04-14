@@ -22,7 +22,7 @@ public class GlobalControllerAdvice {
      * @param session HTTPセッション
      * @return カート内の合計数量
      */
-    @ModelAttribute("cartCount")
+   /**  @ModelAttribute("cartCount")
     public int cartCount(HttpSession session) {
 
         List<CartItem> cart = (List<CartItem>) session.getAttribute("CART");
@@ -33,4 +33,26 @@ public class GlobalControllerAdvice {
                 .mapToInt(CartItem::getQuantity)
                 .sum();
     }
+    */
+   @ModelAttribute("cartCount")
+public int cartCount(HttpSession session) {
+
+    Object obj = session.getAttribute("CART");
+
+    if (obj == null) return 0;
+
+    // デバッグ
+    System.out.println("CARTの中身: " + obj);
+    System.out.println("型: " + obj.getClass());
+
+    if (!(obj instanceof List<?>)) {
+        return 0; // 型違いなら無視
+    }
+
+    List<CartItem> cart = (List<CartItem>) obj;
+
+    return cart.stream()
+            .mapToInt(CartItem::getQuantity)
+            .sum();
+}
 }
