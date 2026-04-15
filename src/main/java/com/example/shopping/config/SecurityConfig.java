@@ -17,30 +17,41 @@ import com.example.shopping.repository.UserRepository;
 @Configuration
 public class SecurityConfig {
 
+    private final CustomUserDetailsService userDetailsService;
+
+    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    http
-        .csrf(csrf -> csrf.disable()
-        )
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/login", "/register", "/css/**").permitAll()
-            .anyRequest().authenticated()
-        )
-        .formLogin(form -> form
-            .loginPage("/login")
-            .defaultSuccessUrl("/", true)
-            .permitAll()
-        )
-        .logout(logout -> logout
-            .logoutSuccessUrl("/login?logout")
-            .permitAll()
-        );
+        http
+            .csrf(csrf -> csrf.disable())
 
-    return http.build();
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/login", "/register", "/css/**").permitAll()
+                .anyRequest().authenticated()
+            )
+
+            .userDetailsService(userDetailsService) 
+
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+            )
+
+            .logout(logout -> logout
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+            );
+
+        return http.build();
     }
 }
