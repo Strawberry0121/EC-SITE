@@ -18,8 +18,6 @@ import com.example.shopping.repository.UserRepository;
 @Configuration
 public class SecurityConfig {
 
-    private final CustomUserDetailsService userDetailsService;
-
     public SecurityConfig(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -41,8 +39,6 @@ public class SecurityConfig {
                 .requestMatchers("/login", "/register", "/css/**").permitAll()
                 .anyRequest().authenticated()
             )
-
-            .userDetailsService(userDetailsService) 
 
             .formLogin(form -> form
                 .loginPage("/login")
