@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <title>商品一覧</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -59,6 +61,8 @@
 
     <!-- JS -->
     <script>
+        const token = document.querySelector('meta[name="_csrf"]').content;
+        const header = document.querySelector('meta[name="_csrf_header"]').content;
         // カート追加処理（Ajax）
         document.querySelectorAll(".add-to-cart-form").forEach(form => {
             form.addEventListener("submit", async function(e) {
@@ -66,6 +70,9 @@
                 const formData = new FormData(form);
                 const response = await fetch("/cart/add", {
                     method: "POST",
+                    headers: {
+                    [header]: token   // ← ★これが重要
+                },
                     body: formData
                 });
                 const cartCount = await response.text();
