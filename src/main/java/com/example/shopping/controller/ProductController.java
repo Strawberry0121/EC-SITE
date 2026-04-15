@@ -28,14 +28,14 @@ public class ProductController {
      * @param model モデルオブジェクト
      * @return index.html
      */
-    /**
+    
     @GetMapping("/")
     public String index(Model model) {
         List<Product> products = productRepo.findAll();
         model.addAttribute("products", products);
         return "index";
     }
-    */
+    
 
     /**
      * 商品一覧ページを表示する
