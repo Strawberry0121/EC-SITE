@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
+import com.example.shopping.service.CustomUserDetailsService;
 
 import com.example.shopping.model.User;
 import com.example.shopping.repository.UserRepository;
