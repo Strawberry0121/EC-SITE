@@ -22,6 +22,8 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
+      Exception ex = new Exception(encodedPassword);
+      throw ex;
+
         userRepository.save(user);
     }
-}
