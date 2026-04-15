@@ -38,12 +38,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(User user) {
-        try{
-            userService.registerUser(user);
-        } catch (Exception e) {
-            return "cart";
-        }
-        return "redirect:/login";
-    }
+public String register(User user) {
+    userService.registerUser(user);
+    return "redirect:/login";
+}
 }
