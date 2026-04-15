@@ -23,8 +23,7 @@ public class UserService {
         user.setPassword(encodedPassword);
 
       Exception ex = new Exception(encodedPassword);
-      throw ex;
-
+ throw ex;
         userRepository.save(user);
     }
 }
