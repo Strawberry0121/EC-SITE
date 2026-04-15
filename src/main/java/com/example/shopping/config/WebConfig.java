@@ -18,10 +18,10 @@ public class WebConfig implements WebMvcConfigurer {
      *
      * @param registry InterceptorRegistry オブジェクト
      */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/login")
-                .excludePathPatterns( "/css/**");
-    }
+    // @Override
+    // public void addInterceptors(InterceptorRegistry registry) {
+    //     registry.addInterceptor(new LoginInterceptor())
+    //             .addPathPatterns("/login")
+    //             .excludePathPatterns( "/css/**");
+    // }
 }
