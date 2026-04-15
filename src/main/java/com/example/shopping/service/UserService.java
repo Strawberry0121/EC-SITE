@@ -17,13 +17,13 @@ public class UserService {
     this.passwordEncoder = passwordEncoder;
 }
 
-    public void registerUser(User user) {
+    public void registerUser(User user)throws Exception {
         //パスワードを暗号化
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
       Exception ex = new Exception(encodedPassword);
- throw ex;
-        userRepository.save(user);
-    }
+    throw ex;
+       /**userRepository.save(user);*/
+           }
 }
