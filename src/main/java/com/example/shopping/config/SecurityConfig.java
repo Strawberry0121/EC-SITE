@@ -17,7 +17,8 @@ import com.example.shopping.repository.UserRepository;
 
 @Configuration
 public class SecurityConfig {
-
+    
+    private final CustomUserDetailsService userDetailsService;
     public SecurityConfig(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
