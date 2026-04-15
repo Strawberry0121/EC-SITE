@@ -71,7 +71,7 @@ public String productDetail(@PathVariable Long id, Model model) {
     return productRepo.findById(id)
             .map(product -> {
                 model.addAttribute("product", product);
-                return "product-detail";
+                return "product-details";
             })
             .orElse("redirect:/products");
 }
