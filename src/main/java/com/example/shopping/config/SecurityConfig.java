@@ -21,10 +21,26 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // 設定
-        return http.build();
+
+    http
+        .csrf(csrf -> csrf.disable()
+        )
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/login", "/register", "/css/**").permitAll()
+            .anyRequest().authenticated()
+        )
+        .formLogin(form -> form
+            .loginPage("/login")
+            .defaultSuccessUrl("/", true)
+            .permitAll()
+        )
+        .logout(logout -> logout
+            .logoutSuccessUrl("/login?logout")
+            .permitAll()
+        );
+
+    return http.build();
     }
 }
