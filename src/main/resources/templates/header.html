@@ -5,24 +5,33 @@
 </head>
 <body>
 
-	<!-- ログイン済み用ヘッダー（リンクあり） -->
-	<header th:fragment="header-loggedin">
-	    <h1>ショッピングサイト</h1>
-	    <nav>
-	        <a th:href="@{/}">ホーム</a>
-	        <a th:href="@{/cart/view}">
-	            🛒 カート
-	            <span id="cart-count" th:text="${cartCount} ?: 0">0</span>
-	        </a>
-	        <a th:href="@{/logout}">ログアウト</a>
-	    </nav>
-	    <hr>
-	</header>
+<!-- ログイン済み用ヘッダー -->
+<header th:fragment="header-loggedin">
+    <h1>ショッピングサイト</h1>
+    <nav>
+        <a th:href="@{/}">ホーム</a>
 
-	<!-- ログインページ用ヘッダー（リンクなし） -->
-	<header th:fragment="header-login">
-	    <h1>ショッピングサイト</h1>
-	    <hr>
-	</header>
+        <a th:href="@{/cart/view}">
+            🛒 カート
+            <span id="cart-count" th:text="${cartCount} ?: 0">0</span>
+        </a>
+
+		  <!-- 👤 ユーザー名表示 -->
+        <span>
+            こんにちは、<span th:text="${#authentication.name}">ユーザー</span> さん
+        </span>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button type="submit">ログアウト</button>
+        </form>
+    </nav>
+    <hr>
+</header>
+
+<!-- ログインページ用ヘッダー -->
+<header th:fragment="header-login">
+    <h1>ショッピングサイト</h1>
+    <hr>
+</header>
+
 </body>
 </html>
