@@ -13,12 +13,6 @@
     <nav>
         <a th:href="@{/}">商品一覧</a> |
 
-        <span>
-            こんにちは、
-            <span th:text="${#authentication.name}"></span>
-            さん
-        </span> |
-
         <a th:href="@{/cart/view}">
             🛒 カート
             <span id="cart-count" th:text="${cartCount}">0</span>
