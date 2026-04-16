@@ -12,12 +12,12 @@
 	<form method="post" action="/register">
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<div>
-    <label>ユーザー名:</label>
+    <label>ユーザー名</label>
     <input name="username" required>
 	</div>
 
 	<div>
-    	<label>パスワード:</label>
+    	<label>パスワード</label>
     	<input type="password" name="password" required>
 	</div>
 
@@ -25,7 +25,7 @@
     	<button>登録</button>
 	</div>
 	<div>
-    	<p>ログインの場合はこちら: <a th:href="@{/login}">Login</a></p>
+    	<a th:href="@{/login}">ログインの場合はこちら</a>
 	</div>
 		</form>
 	</body>
