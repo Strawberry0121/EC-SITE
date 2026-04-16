@@ -22,7 +22,7 @@
     <div class="product-info">
         <h2 th:text="${product.name}">商品名</h2>
         <p>カテゴリ: <span th:text="${product.category}"></span></p>
-        <p>価格: ¥<span th:text="${product.price}"></span></p>
+        <p>価格: ¥<span th:text="${product.priceInt}"></span></p>
 
         <p th:text="${product.description ?: '説明なし'}"></p>
 
