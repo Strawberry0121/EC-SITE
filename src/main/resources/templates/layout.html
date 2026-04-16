@@ -5,8 +5,7 @@
 <!-- =========================
      ログイン済みヘッダー
 ========================= -->
-<header th:fragment="header-loggedin"
-        th:if="${#authorization.expression('isAuthenticated()')}">
+<header th:fragment="header-loggedin">
 
     <h1>ショッピングサイト</h1>
 
@@ -18,7 +17,6 @@
             <span id="cart-count" th:text="${cartCount}">0</span>
         </a> |
 
-        <!-- ログアウト（POST） -->
         <form th:action="@{/logout}" method="post" style="display:inline;">
             <input type="hidden"
                    th:name="${_csrf.parameterName}"
