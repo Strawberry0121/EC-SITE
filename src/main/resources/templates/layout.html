@@ -9,6 +9,11 @@
 
 	    <nav>
 	        <a th:href="@{/}">商品一覧</a> |
+			 <span>
+            こんにちは、
+            <span th:text="${#authentication.name}">ユーザー</span>
+            さん
+        </span>
 	        <a th:href="@{/cart/view}">
 	            🛒 カート
 	            <!-- ⭐ id を付与して JS で更新可能に -->

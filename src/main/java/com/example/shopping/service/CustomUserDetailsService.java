@@ -22,19 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.repo = repo;
     }
 
-    /**
-   @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<com.example.shopping.model.User> userOpt = repo.findByUsername(username);
-        com.example.shopping.model.User user = userOpt.orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        return User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .roles("USER")  // 必要に応じてROLEを変更
-                .build();
-    }
-    */
     @Override
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

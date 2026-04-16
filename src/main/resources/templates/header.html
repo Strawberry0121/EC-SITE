@@ -15,11 +15,7 @@
             🛒 カート
             <span id="cart-count" th:text="${cartCount} ?: 0">0</span>
         </a>
-
-		  <!-- 👤 ユーザー名表示 -->
-        <span>
-            こんにちは、<span th:text="${#authentication.name}">ユーザー</span> さん
-        </span>
+       
        <form th:action="@{/logout}" method="post" style="display:inline;">
     <input type="hidden"
            th:name="${_csrf.parameterName}"
