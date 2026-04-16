@@ -14,6 +14,12 @@
 	            <!-- ⭐ id を付与して JS で更新可能に -->
 	           <span id="cart-count" th:text="${cartCount}">0</span>
 	        </a> |
+			<form th:action="@{/logout}" method="post" style="display:inline;">
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+    <button type="submit">ログアウト</button>
+</form>
 	    </nav>
 
 	    <hr>
