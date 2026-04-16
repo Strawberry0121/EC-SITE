@@ -2,44 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-	<!-- html / head / body は書かない -->
+<!-- =========================
+     ログイン済みヘッダー
+========================= -->
+<header th:fragment="header-loggedin"
+        th:if="${#authorization.expression('isAuthenticated()')}">
 
-	<header th:fragment="header-loggedin">
-	    <h1>ショッピングサイト</h1>
+    <h1>ショッピングサイト</h1>
 
-	    <nav>
-	        <a th:href="@{/}">商品一覧</a> |
-			 <span>
+    <nav>
+        <a th:href="@{/}">商品一覧</a> |
+
+        <span>
             こんにちは、
-            <span th:text="${#authentication.name}">ユーザー</span>
+            <span th:text="${#authentication.name}"></span>
             さん
-        </span>
-	        <a th:href="@{/cart/view}">
-	            🛒 カート
-	            <!-- ⭐ id を付与して JS で更新可能に -->
-	           <span id="cart-count" th:text="${cartCount}">0</span>
-	        </a> |
-			<form th:action="@{/logout}" method="post" style="display:inline;">
-    <input type="hidden"
-           th:name="${_csrf.parameterName}"
-           th:value="${_csrf.token}" />
-    <button type="submit">ログアウト</button>
-</form>
-	    </nav>
+        </span> |
 
-	    <hr>
-	</header>
-	<!-- ログインページ用ヘッダー（リンクなし） -->
-		<header th:fragment="header-login">
-		    <h1>ショッピングサイト</h1>
-		    <hr>
-		</header>
-	<footer th:fragment="footer">
-	    <hr>
-	    <p>© 2026 Shopping Site</p>
-	    <!-- ⭐ toast はフッターに置くと Ajax で表示できる -->
-	    <div id="toast" class="toast"></div>
-	</footer>
-	
+        <a th:href="@{/cart/view}">
+            🛒 カート
+            <span id="cart-count" th:text="${cartCount}">0</span>
+        </a> |
+
+        <!-- ログアウト（POST） -->
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}" />
+            <button type="submit">ログアウト</button>
+        </form>
+    </nav>
+
+    <hr>
+</header>
+
+
+<!-- =========================
+     ログイン前ヘッダー
+========================= -->
+<header th:fragment="header-login">
+
+    <h1>ショッピングサイト</h1>
+
+    <nav>
+        <a th:href="@{/login}">ログイン</a> |
+        <a th:href="@{/register}">新規登録</a>
+    </nav>
+
+    <hr>
+</header>
+
+
+<!-- =========================
+     フッター
+========================= -->
+<footer th:fragment="footer">
+    <hr>
+    <p>© 2026 Shopping Site</p>
+    <div id="toast" class="toast"></div>
+</footer>
+
 </body>
 </html>
