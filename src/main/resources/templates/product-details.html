@@ -1,6 +1,5 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
 
 <head>
 	<meta charset="UTF-8">
@@ -35,4 +34,46 @@
 	</div>
 </body>
 
+</html> -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/product-detail.css}">
+	<title>商品詳細</title>
+</head>
+
+<body>
+
+<div class="product-container">
+
+    <!-- 画像 -->
+    <div class="product-image">
+        <img src="https://via.placeholder.com/250" alt="商品画像">
+    </div>
+
+    <!-- 商品情報 -->
+    <div class="product-info">
+        <h2 th:text="${product.name}">商品名</h2>
+        <p>カテゴリ: <span th:text="${product.category}"></span></p>
+        <p>価格: ¥<span th:text="${product.price}"></span></p>
+
+        <p th:text="${product.description ?: '説明なし'}"></p>
+
+        <div class="cart-form">
+            <input type="number" value="1" min="1">
+            <button>カートに追加</button>
+        </div>
+
+        <div class="back-link">
+            <a th:href="@{/}">← 商品一覧に戻る</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
 </html>
