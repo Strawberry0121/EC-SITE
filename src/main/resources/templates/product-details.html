@@ -1,40 +1,3 @@
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-	<link rel="stylesheet" th:href="@{/css/style.css}">
-	<link rel="stylesheet" th:href="@{/css/product-detail.css}">
-	<title>Insert title here</title>
-</head>
-
-<body>
-	<div class="product-details">
-		<h2 th:text="${product.name}">商品名</h2>
-		<p>カテゴリ: <span th:text="${product.category}"></span></p>
-		<p>価格: ¥<span th:text="${product.price}"></span></p>
-		<div class="product-tabs">
-			<ul class="tabs">
-				<li>詳細</li>
-				<li>レビュー</li>
-				<li>配送情報</li>
-			</ul>
-			<div class="tab-content">
-				<div th:text="${product.description ?: '説明なし'}"></div>
-				<div th:text="'レビューは未実装'"></div>
-				<div th:text="'配送情報は未実装'"></div>
-			</div>
-			<div style="margin-top: 20px;">
-    <a th:href="@{/}" style="text-decoration: none;">
-        ← 商品一覧に戻る
-    </a>
-</div>
-		</div>
-	</div>
-</body>
-
-</html> -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -42,7 +5,6 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
-	<!-- <link rel="stylesheet" th:href="@{/css/product-detail.css}"> -->
 	<link rel="stylesheet" href="/css/product-detail.css">
 	<title>商品詳細</title>
 </head>
@@ -52,9 +14,9 @@
 <div class="product-container">
 
     <!-- 画像 -->
-    <div class="product-image">
+    <!-- <div class="product-image">
         <img src="https://via.placeholder.com/250" alt="商品画像">
-    </div>
+    </div> -->
 
     <!-- 商品情報 -->
     <div class="product-info">
