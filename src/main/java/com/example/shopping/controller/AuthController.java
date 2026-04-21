@@ -44,6 +44,7 @@ public String register(@Valid User user, BindingResult result) {
         return "register";
     }
     userService.save(user);
+    userService.registerUser(user);
     return "redirect:/login";
 }
 }
