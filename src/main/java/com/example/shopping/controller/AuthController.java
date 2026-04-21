@@ -13,7 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.shopping.repository.UserRepository;
-
+import org.springframework.validation.BindingResult;
+import jakarta.validation.Valid;
 /**
  * 認証・登録を担当するコントローラー
  * ログインページとユーザー登録機能を提供する
