@@ -38,8 +38,11 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(User user) {
-        userService.registerUser(user);
-        return "redirect:/login";
+public String register(@Valid User user, BindingResult result) {
+    if (result.hasErrors()) {
+        return "register";
+    }
+    userService.save(user);
+    return "redirect:/login";
 }
 }
