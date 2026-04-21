@@ -43,7 +43,6 @@ public String register(@Valid User user, BindingResult result) {
     if (result.hasErrors()) {
         return "register";
     }
-    userService.save(user);
     userService.registerUser(user);
     return "redirect:/login";
 }
