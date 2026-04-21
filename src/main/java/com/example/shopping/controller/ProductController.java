@@ -57,14 +57,7 @@ public class ProductController {
      * @param model モデルオブジェクト
      * @return product-detail.html または一覧ページへリダイレクト
      */
-    /**@GetMapping("/product/{id}")
-    public String productDetail(@PathVariable("id") Long id, Model model) {
-        Product product = productRepo.findById(id).orElse(null);
-        if (product == null) return "redirect:/products";
-        model.addAttribute("product", product);
-        return "product-detail";
-    }
-    */
+    
     @GetMapping("/product/{id}")
 public String productDetail(@PathVariable Long id, Model model) {
 
