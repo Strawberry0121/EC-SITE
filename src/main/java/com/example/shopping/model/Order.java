@@ -41,4 +41,8 @@ public class Order {
     public void setItems(List<OrderItem> items) { this.items = items; }
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
+
+    public int getTotalPrice() {
+    return (int) total.intValue(); // 小数点切り捨て
+}
 }
