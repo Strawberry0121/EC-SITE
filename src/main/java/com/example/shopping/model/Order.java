@@ -43,6 +43,6 @@ public class Order {
     public void setUser(User user) { this.user = user; }
 
     public int getTotalPrice() {
-    return (int) total.intValue(); // 小数点切り捨て
-}
-}
+    return (int) total; // これでOK（切り捨て）
+    }
+    }
