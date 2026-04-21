@@ -13,12 +13,16 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users") 
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+      @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @NotBlank(message = "ユーザー名は必須です")
+    @Size(min = 3, max = 20, message = "3〜20文字で入力してください")
     @Column(unique = true, nullable = false)
     private String username;
     
+    @NotBlank(message = "パスワードは必須です")
+    @Size(min = 6, message = "6文字以上で入力してください")
     @Column(nullable = false)
     private String password;
 
