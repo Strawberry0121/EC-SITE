@@ -53,3 +53,7 @@
 	font-size: 14px;
 	transition: opacity 0.3s ease;
 }
+.error {
+    color: red;
+    font-size: 0.9em;
+}
